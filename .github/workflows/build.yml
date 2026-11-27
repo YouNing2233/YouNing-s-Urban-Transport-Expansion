@@ -22,12 +22,6 @@ jobs:
         include:
           - { mod: fabric,          common: common,          mc: "1.20.1" }
           - { mod: forge,           common: common,          mc: "1.20.1" }
-          - { mod: fabric-1.19.4,   common: common-1.19.4,   mc: "1.19.4" }
-          - { mod: forge-1.19.4,    common: common-1.19.4,   mc: "1.19.4" }
-          - { mod: fabric-1.19.2,   common: common-1.19.2,   mc: "1.19.2" }
-          - { mod: forge-1.19.2,    common: common-1.19.2,   mc: "1.19.2" }
-          - { mod: fabric-1.18.2,   common: common-1.18.2,   mc: "1.18.2" }
-          - { mod: forge-1.18.2,    common: common-1.18.2,   mc: "1.18.2" }
 
     steps:
       - uses: actions/checkout@v4
@@ -50,14 +44,6 @@ jobs:
           mkdir -p mtr-jars
           cd mtr-jars
           dl() { echo "==> $2"; curl -fSL --retry 5 --retry-delay 3 -o "$2" "$1"; }
-
-          # MTR 3.2.2-hotfix-1（Modrinth 官方 CDN，文件名与 build.gradle 完全一致）
-          dl "https://cdn.modrinth.com/data/XKPAmI6u/versions/KD7TXFaw/MTR-fabric-1.18.2-3.2.2-hotfix-1.jar" "MTR-fabric-1.18.2-3.2.2-hotfix-1.jar"
-          dl "https://cdn.modrinth.com/data/XKPAmI6u/versions/aF2FI7ui/MTR-forge-1.18.2-3.2.2-hotfix-1.jar"  "MTR-forge-1.18.2-3.2.2-hotfix-1.jar"
-          dl "https://cdn.modrinth.com/data/XKPAmI6u/versions/H0yHV2yE/MTR-fabric-1.19.2-3.2.2-hotfix-1.jar" "MTR-fabric-1.19.2-3.2.2-hotfix-1.jar"
-          dl "https://cdn.modrinth.com/data/XKPAmI6u/versions/vkmzH7aU/MTR-forge-1.19.2-3.2.2-hotfix-1.jar"  "MTR-forge-1.19.2-3.2.2-hotfix-1.jar"
-          dl "https://cdn.modrinth.com/data/XKPAmI6u/versions/UT2U5yfn/MTR-fabric-1.19.4-3.2.2-hotfix-1.jar" "MTR-fabric-1.19.4-3.2.2-hotfix-1.jar"
-          dl "https://cdn.modrinth.com/data/XKPAmI6u/versions/PP5puu9Z/MTR-forge-1.19.4-3.2.2-hotfix-1.jar"  "MTR-forge-1.19.4-3.2.2-hotfix-1.jar"
 
           # MTR 3.6.2.2 for 1.20.1
           dl "${MTR_1201_BASE}/MTR-fabric-1.20.1-3.6.2.2.jar" "MTR-fabric-1.20.1-3.6.2.2.jar"

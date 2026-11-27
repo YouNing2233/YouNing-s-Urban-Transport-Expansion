@@ -9,9 +9,8 @@
 | Minecraft | Fabric | Forge |
 |---|---|---|
 | 1.20.1 | ✅ | ✅ |
-| 1.19.4 | ✅ | ✅ |
-| 1.19.2 | ✅ | ✅ |
-| 1.18.2 | ✅ | ✅ |
+
+> 当前只维护 1.20.1（Fabric / Forge 双端）。1.18.2 / 1.19.2 / 1.19.4 已暂时移除，后续再补。
 
 依赖：[MTR (Minecraft Transit Railway)](https://modrinth.com/mod/minecraft-transit-railway)、Architectury API、Cloth Config。
 

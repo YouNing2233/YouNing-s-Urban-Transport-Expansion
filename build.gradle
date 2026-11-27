@@ -1,16 +1,12 @@
-import groovy.json.JsonSlurper
-
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "1.7-SNAPSHOT" apply false
     id "com.github.johnrengelman.shadow" version "8.1.1" apply false
 }
 
-def default_minecraft_version = "1.20.1"
-def minecraft_version = project.properties.containsKey("buildVersion") ? project.getProperties().get("buildVersion") : default_minecraft_version
-def minecraft_main_version = minecraft_version.split("\\.")[1] as int
+def minecraft_version = "1.20.1"
 
-// ── 1.20.1（默认树） ──────────────────────────────────────────────
+// ── 1.20.1 依赖版本 ─────────────────────────────────────────────
 rootProject.ext.fabric_loader_version = "0.19.3"
 rootProject.ext.forge_version = "1.20.1-47.4.22"
 rootProject.ext.fabric_api_version = "0.92.11+1.20.1"
@@ -20,42 +16,6 @@ rootProject.ext.cloth_config_forge_version = "11.1.136"
 rootProject.ext.architectury_version = "9.2.14"
 rootProject.ext.architectury_id = "dev.architectury"
 
-// ── 1.19.4 ───────────────────────────────────────────────────────
-def minecraft_version_1194 = "1.19.4"
-def mtr_jar_1194 = "MTR-fabric-1.19.4-3.2.2-hotfix-1.jar"
-def mtr_forge_jar_1194 = "MTR-forge-1.19.4-3.2.2-hotfix-1.jar"
-def fabric_loader_version_1194 = "0.19.3"
-def fabric_api_version_1194 = "0.87.2+1.19.4"
-def mod_menu_version_1194 = "6.3.1"
-def cloth_config_fabric_version_1194 = "8.3.134"
-def forge_version_1194 = "1.19.4-45.4.3"
-def cloth_config_forge_version_1194 = "8.3.134"
-def architectury_version_1194 = "8.2.91"
-
-// ── 1.19.2 ───────────────────────────────────────────────────────
-def minecraft_version_1192 = "1.19.2"
-def mtr_jar_1192 = "MTR-fabric-1.19.2-3.2.2-hotfix-1.jar"
-def mtr_forge_jar_1192 = "MTR-forge-1.19.2-3.2.2-hotfix-1.jar"
-def fabric_loader_version_1192 = "0.19.3"
-def fabric_api_version_1192 = "0.77.0+1.19.2"
-def mod_menu_version_1192 = "4.2.0-beta.2"
-def cloth_config_fabric_version_1192 = "8.3.134"
-def forge_version_1192 = "1.19.2-43.5.2"
-def cloth_config_forge_version_1192 = "8.3.134"
-def architectury_version_1192 = "6.6.92"
-
-// ── 1.18.2 ───────────────────────────────────────────────────────
-def minecraft_version_1182 = "1.18.2"
-def mtr_jar_1182 = "MTR-fabric-1.18.2-3.2.2-hotfix-1.jar"
-def mtr_forge_jar_1182 = "MTR-forge-1.18.2-3.2.2-hotfix-1.jar"
-def fabric_loader_version_1182 = "0.19.3"
-def fabric_api_version_1182 = "0.77.0+1.18.2"
-def mod_menu_version_1182 = "3.2.5"
-def cloth_config_fabric_version_1182 = "7.0.72"
-def forge_version_1182 = "1.18.2-40.3.12"
-def cloth_config_forge_version_1182 = "7.0.72"
-def architectury_version_1182 = "4.12.94"
-
 architectury {
     minecraft = minecraft_version
 }
@@ -63,7 +23,7 @@ architectury {
 subprojects {
     apply plugin: "dev.architectury.loom"
 
-    // Forge 1.19.2 (43.5.2) 的 userdev 声明 cpw.mods:modlauncher:10.0.10，该版本只在官方 maven 上，
+    // Forge 的 userdev 声明 cpw.mods:modlauncher:10.0.10，该版本只在官方 maven 上，
     // 国内镜像最高 10.0.9；两者对编译没有 API 差异，统一降级。
     configurations.configureEach {
         resolutionStrategy.eachDependency { details ->
@@ -78,45 +38,31 @@ subprojects {
     def mtrJarDir = (project.findProperty("mtrJarDir") ?: "E:/Project/MTRjars").toString()
     def mtrJarPaths = { String fileName -> new File(mtrJarDir, fileName).absolutePath }
 
-    def isLegacy1194 = project.name.endsWith("-1.19.4")
-    def isLegacy1192 = project.name.endsWith("-1.19.2")
-    def isLegacy1182 = project.name.endsWith("-1.18.2")
     def isForge = project.name.startsWith("forge")
     def isCommon = project.name.startsWith("common")
 
-    def subMcVersion = isLegacy1194 ? minecraft_version_1194 : (isLegacy1192 ? minecraft_version_1192 : (isLegacy1182 ? minecraft_version_1182 : minecraft_version))
-    def subMtrJar
-    if (isForge) {
-        subMtrJar = mtrJarPaths(isLegacy1194 ? mtr_forge_jar_1194 : (isLegacy1192 ? mtr_forge_jar_1192 : (isLegacy1182 ? mtr_forge_jar_1182 : "MTR-forge-1.20.1-3.6.2.2.jar")))
-    } else {
-        subMtrJar = mtrJarPaths(isLegacy1194 ? mtr_jar_1194 : (isLegacy1192 ? mtr_jar_1192 : (isLegacy1182 ? mtr_jar_1182 : "MTR-fabric-1.20.1-3.6.2.2.jar")))
-    }
-
-    project.ext.subMinecraftVersion = subMcVersion
-    project.ext.subMtrJar = subMtrJar
-    project.ext.subFabricLoaderVersion = isLegacy1194 ? fabric_loader_version_1194 : (isLegacy1192 ? fabric_loader_version_1192 : (isLegacy1182 ? fabric_loader_version_1182 : rootProject.fabric_loader_version))
-    project.ext.subFabricApiVersion = isLegacy1194 ? fabric_api_version_1194 : (isLegacy1192 ? fabric_api_version_1192 : (isLegacy1182 ? fabric_api_version_1182 : rootProject.fabric_api_version))
-    project.ext.subModMenuVersion = isLegacy1194 ? mod_menu_version_1194 : (isLegacy1192 ? mod_menu_version_1192 : (isLegacy1182 ? mod_menu_version_1182 : rootProject.mod_menu_version))
-    project.ext.subClothConfigVersion = isLegacy1194 ? cloth_config_fabric_version_1194 : (isLegacy1192 ? cloth_config_fabric_version_1192 : (isLegacy1182 ? cloth_config_fabric_version_1182 : rootProject.cloth_config_fabric_version))
-    project.ext.subIsLegacy1194 = isLegacy1194
-    project.ext.subIsLegacy1192 = isLegacy1192
-    project.ext.subIsLegacy1182 = isLegacy1182
+    project.ext.subMinecraftVersion = minecraft_version
+    project.ext.subMtrJar = isForge ? mtrJarPaths("MTR-forge-1.20.1-3.6.2.2.jar") : mtrJarPaths("MTR-fabric-1.20.1-3.6.2.2.jar")
+    project.ext.subFabricLoaderVersion = rootProject.fabric_loader_version
+    project.ext.subFabricApiVersion = rootProject.fabric_api_version
+    project.ext.subModMenuVersion = rootProject.mod_menu_version
+    project.ext.subClothConfigVersion = rootProject.cloth_config_fabric_version
+    project.ext.subClothConfigForgeVersion = rootProject.cloth_config_forge_version
+    project.ext.subArchitecturyVersion = rootProject.architectury_version
+    project.ext.subForgeVersion = rootProject.forge_version
     project.ext.subIsForge = isForge
-    project.ext.subForgeVersion = isLegacy1194 ? forge_version_1194 : (isLegacy1192 ? forge_version_1192 : (isLegacy1182 ? forge_version_1182 : rootProject.forge_version))
-    project.ext.subArchitecturyVersion = isLegacy1194 ? architectury_version_1194 : (isLegacy1192 ? architectury_version_1192 : (isLegacy1182 ? architectury_version_1182 : rootProject.architectury_version))
-    project.ext.subClothConfigForgeVersion = isLegacy1194 ? cloth_config_forge_version_1194 : (isLegacy1192 ? cloth_config_forge_version_1192 : (isLegacy1182 ? cloth_config_forge_version_1182 : rootProject.cloth_config_forge_version))
 
     loom {
         silentMojangMappingsLicense()
     }
 
     dependencies {
-        minecraft "com.mojang:minecraft:${subMcVersion}"
+        minecraft "com.mojang:minecraft:${minecraft_version}"
         mappings loom.officialMojangMappings()
 
-        // common 树需要 fabric-loader + architectury + cloth-config 才能编译跨平台的注册代码
-        if (isCommon && project.name == "common") {
-            // 1.20.1 的 common 树需要 MTR 才能编译继承 MTR 底座（三扇屏蔽门等）的代码
+        // common 树需要 MTR + fabric-loader + architectury + cloth-config 才能编译
+        // 继承 MTR 底座（三扇屏蔽门等）与跨平台注册代码
+        if (isCommon) {
             modImplementation files(project.subMtrJar)
             modImplementation "net.fabricmc:fabric-loader:${project.subFabricLoaderVersion}"
             modApi "dev.architectury:architectury:${project.subArchitecturyVersion}"
