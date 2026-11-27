@@ -11,7 +11,7 @@ import mtr.mappings.UtilitiesClient;
 import mtr.render.RenderTrains;
 import mtr.render.StoredMatrixTransformations;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -44,8 +44,8 @@ public class RenderPSDTopWide extends BlockEntityRendererMapper<BlockPSDTopWide.
     /** 纯白贴图，配合颜色参数画出实色底板。 */
     protected static final ResourceLocation BOARD_TEXTURE = new ResourceLocation("mtr", "textures/block/white.png");
 
-    public RenderPSDTopWide(BlockEntityRenderDispatcher dispatcher) {
-        super(dispatcher);
+    public RenderPSDTopWide(BlockEntityRendererProvider.Context context) {
+        super(context.getBlockEntityRenderDispatcher());
     }
 
     @Override

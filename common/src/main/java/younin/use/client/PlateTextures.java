@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static mtr.client.ClientCache.LINE_HEIGHT_MULTIPLIER;
 import static mtr.data.IGui.ARGB_BLACK;
 import static mtr.data.IGui.ARGB_WHITE;
 
@@ -58,7 +59,7 @@ public final class PlateTextures {
             final NativeImage image = new NativeImage(NativeImage.Format.RGBA, width, height, false);
             PlateText.fill(image, backgroundColor);
 
-            final PlateText.Text name = PlateText.create(getStationName(platformId), width - padding * 2, (int) (tileSize * IGui.LINE_HEIGHT_MULTIPLIER), tileSize * 3, tileSize * 3 / 2, padding, IGui.HorizontalAlignment.CENTER);
+            final PlateText.Text name = PlateText.create(getStationName(platformId), width - padding * 2, (int) (tileSize * LINE_HEIGHT_MULTIPLIER), tileSize * 3, tileSize * 3 / 2, padding, IGui.HorizontalAlignment.CENTER);
             PlateText.drawString(image, name, width / 2, height / 2, IGui.HorizontalAlignment.CENTER, IGui.VerticalAlignment.CENTER, backgroundColor, textColor, false);
 
             if (transparentColor != 0) {
@@ -93,7 +94,7 @@ public final class PlateTextures {
             final int arrowSize = tileSize;
 
             if (destination.isEmpty() && nextStation.isEmpty()) {
-                final PlateText.Text terminus = PlateText.create("终点站", width - padding * 2, (int) (tileSize * IGui.LINE_HEIGHT_MULTIPLIER), tileSize * 3, tileSize * 3 / 2, padding, IGui.HorizontalAlignment.CENTER);
+                final PlateText.Text terminus = PlateText.create("终点站", width - padding * 2, (int) (tileSize * LINE_HEIGHT_MULTIPLIER), tileSize * 3, tileSize * 3 / 2, padding, IGui.HorizontalAlignment.CENTER);
                 PlateText.drawString(image, terminus, width / 2, height / 2, IGui.HorizontalAlignment.CENTER, IGui.VerticalAlignment.CENTER, backgroundColor, textColor, false);
                 return image;
             }
@@ -106,7 +107,7 @@ public final class PlateTextures {
             }
 
             final int textX = flipArrow ? width - padding - arrowSize - padding : padding + arrowSize + padding;
-            final PlateText.Text destinationText = PlateText.create(destination, width - padding * 2 - arrowSize - padding, (int) (tileSize * IGui.LINE_HEIGHT_MULTIPLIER), tileSize * 3, tileSize * 3 / 2, 0, flipArrow ? IGui.HorizontalAlignment.RIGHT : IGui.HorizontalAlignment.LEFT);
+            final PlateText.Text destinationText = PlateText.create(destination, width - padding * 2 - arrowSize - padding, (int) (tileSize * LINE_HEIGHT_MULTIPLIER), tileSize * 3, tileSize * 3 / 2, 0, flipArrow ? IGui.HorizontalAlignment.RIGHT : IGui.HorizontalAlignment.LEFT);
             PlateText.drawString(image, destinationText, textX, height / 2, flipArrow ? IGui.HorizontalAlignment.RIGHT : IGui.HorizontalAlignment.LEFT, IGui.VerticalAlignment.CENTER, 0, textColor, false);
 
             if (!nextStation.isEmpty()) {
