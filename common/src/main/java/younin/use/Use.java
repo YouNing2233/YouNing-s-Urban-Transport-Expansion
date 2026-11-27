@@ -22,6 +22,7 @@ public final class Use {
 
     /** 客户端初始化：渲染器、按键、配置界面等。 */
     public static void initClient() {
+        younin.use.client.UseClient.register();
         LOGGER.info("[{}] client initialised", MOD_NAME);
     }
 }

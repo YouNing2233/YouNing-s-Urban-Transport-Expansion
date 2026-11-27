@@ -1,8 +1,14 @@
 {
-  "modmenu.nameTranslation.use": "USE",
-  "modmenu.descriptionTranslation.use": "YouNing's Urban Transport Expansion",
-  "item.use.dispatcher_baton": "Dispatcher's Baton",
-  "itemGroup.use.main": "[USE] Main Tab",
+  "block.use.apg_door_wide": "Three-leaf PSD Door (Half Height)",
+  "block.use.psd_door_wide": "Three-leaf PSD Door (Full Height)",
   "block.use.use_emblem": "USE Emblem",
-  "itemGroup.use.beijing": "[USE] Beijing Metro"
+  "item.use.dispatcher_baton": "Dispatcher's Baton",
+  "itemGroup.use.beijing": "[USE] Beijing Metro",
+  "itemGroup.use.main": "[USE] Main Tab",
+  "message.use.wide_door.open_all": "Doors: all three leaves open (two left, one right)",
+  "message.use.wide_door.open_left": "Doors: two leaves open on the left",
+  "message.use.wide_door.open_right": "Doors: two leaves open on the right",
+  "modmenu.descriptionTranslation.use": "YouNing's Urban Transport Expansion",
+  "modmenu.nameTranslation.use": "USE",
+  "tooltip.use.wide_door": "Use the Dispatcher's Baton to change how it opens"
 }

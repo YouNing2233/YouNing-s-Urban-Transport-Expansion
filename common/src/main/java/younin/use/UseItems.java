@@ -5,8 +5,12 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import younin.use.block.BlockAPGDoorWide;
+import younin.use.block.BlockPSDDoorWide;
 import younin.use.block.UseEmblem;
 import younin.use.item.DispatcherBaton;
+import younin.use.item.ItemWideApgDoor;
+import younin.use.item.ItemWidePsdDoor;
 import dev.architectury.registry.CreativeTabRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -34,6 +38,19 @@ public final class UseItems {
     public static final RegistrySupplier<Item> DISPATCHER_BATON = ITEMS.register("dispatcher_baton",
             () -> new DispatcherBaton(new Item.Properties()));
 
+    // ── 三扇宽屏蔽门（北京地铁）────────────────────────────────────
+    public static final RegistrySupplier<Block> PSD_DOOR_WIDE = BLOCKS.register("psd_door_wide",
+            BlockPSDDoorWide::new);
+
+    public static final RegistrySupplier<Block> APG_DOOR_WIDE = BLOCKS.register("apg_door_wide",
+            BlockAPGDoorWide::new);
+
+    public static final RegistrySupplier<Item> PSD_DOOR_WIDE_ITEM = ITEMS.register("psd_door_wide",
+            () -> new ItemWidePsdDoor(PSD_DOOR_WIDE, new Item.Properties().stacksTo(1)));
+
+    public static final RegistrySupplier<Item> APG_DOOR_WIDE_ITEM = ITEMS.register("apg_door_wide",
+            () -> new ItemWideApgDoor(APG_DOOR_WIDE, new Item.Properties().stacksTo(1)));
+
     private UseItems() {
     }
 
@@ -41,6 +58,8 @@ public final class UseItems {
         BLOCKS.register();
         ITEMS.register();
         TABS.register();
+        UseBlockEntityTypes.register();
         CreativeTabRegistry.append(MAIN_TAB, DISPATCHER_BATON.get(), USE_EMBLEM_ITEM.get());
+        CreativeTabRegistry.append(BEIJING_TAB, PSD_DOOR_WIDE_ITEM.get(), APG_DOOR_WIDE_ITEM.get());
     }
 }

@@ -1,8 +1,14 @@
 {
-  "modmenu.nameTranslation.use": "USE",
-  "modmenu.descriptionTranslation.use": "YouNing's Urban Transport Expansion",
-  "item.use.dispatcher_baton": "调度棒",
-  "itemGroup.use.main": "[USE]主标签页",
+  "block.use.apg_door_wide": "三扇宽屏蔽门（半高）",
+  "block.use.psd_door_wide": "三扇宽屏蔽门（全高）",
   "block.use.use_emblem": "USE标识",
-  "itemGroup.use.beijing": "[USE]北京地铁"
+  "item.use.dispatcher_baton": "调度棒",
+  "itemGroup.use.beijing": "[USE]北京地铁",
+  "itemGroup.use.main": "[USE]主标签页",
+  "message.use.wide_door.open_all": "开门方式：三扇全开（左二右一）",
+  "message.use.wide_door.open_left": "开门方式：左侧两扇开",
+  "message.use.wide_door.open_right": "开门方式：右侧两扇开",
+  "modmenu.descriptionTranslation.use": "YouNing's Urban Transport Expansion",
+  "modmenu.nameTranslation.use": "USE",
+  "tooltip.use.wide_door": "用调度棒右键切换开门方式"
 }
