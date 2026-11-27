@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/logo.png" width="180" alt="USE logo"></p>
+
 # USE — YouNing's Urban Transport Expansion
 
 城市交通扩展模组，基于 [Architectury](https://github.com/architectury) 同时支持 Fabric 与 Forge。
