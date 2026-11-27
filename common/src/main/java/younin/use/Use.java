@@ -16,6 +16,7 @@ public final class Use {
 
     /** 主初始化：注册表、网络包、事件等后续都挂在这里。 */
     public static void init() {
+        UseItems.register();
         LOGGER.info("[{}] initialised", MOD_NAME);
     }
 
