@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+license="All-Rights-Reserved"
+
+[[mods]]
+modId="use"
+version="${version}"
+displayName="USE - YouNing's Urban Transport Expansion"
+description='''
+YouNing's Urban Transport Expansion —— 城市交通扩展模组。
+'''
+
+[[dependencies.use]]
+modId="forge"
+mandatory=true
+versionRange="[1.18.2-40.0,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.use]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.18.2,1.19)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.use]]
+modId="architectury"
+mandatory=true
+versionRange="[4,)"
+ordering="NONE"
+side="BOTH"

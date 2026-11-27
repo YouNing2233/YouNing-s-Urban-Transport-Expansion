@@ -1,0 +1,19 @@
+# Gradle / Loom
+.gradle/
+build/
+*/build/
+*/.gradle/
+run/
+checkouts/
+.architectury-transformer/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# 其它
+*.log

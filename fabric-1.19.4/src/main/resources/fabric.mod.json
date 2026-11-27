@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "use",
+  "version": "${version}",
+  "name": "USE - YouNing's Urban Transport Expansion",
+  "description": "YouNing's Urban Transport Expansion —— 城市交通扩展模组。",
+  "authors": ["攸宁"],
+  "license": "All-Rights-Reserved",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["younin.use.fabric.UseFabric"],
+    "client": ["younin.use.fabric.UseFabricClient"]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "fabric": "*",
+    "minecraft": "1.1.19.4",
+    "architectury": ">=8"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}

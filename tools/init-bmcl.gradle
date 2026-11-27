@@ -1,0 +1,62 @@
+// Forge / NeoForge / Fabric 的 maven 重定向到 BMCLAPI + 本地补充仓库。
+//
+// 用法：
+//   .\gradlew.bat :forge-1.17.1:build -PmtrJarDir=E:/Project/MTRjars -I tools/init-bmcl.gradle
+//
+// 解决三个问题：
+//  1) Loom 会把 maven.minecraftforge.net 注入 project.repositories 并在"配置阶段"当场解析，
+//     本机到该域名的速度只有约 13 KB/s 且有连接黑洞，几 MB 的 installertools 会卡十几分钟。
+//     BMCLAPI 有相同的目录结构，秒级。
+//  2) Loom 声明的是动态版本（net.minecraftforge:forgespi:4.0.+、eventbus:5.0.+、coremods:5.0.+），
+//     而 BMCLAPI 上的 maven-metadata.xml 停在 2019 年，没有 4/5 系列，动态解析直接失败。
+//     所以额外插入本地补充仓库 tools/dynex-maven，里面放了这些模块的确切版本 + 正确的 metadata。
+//  3) BMCLAPI 上 grossjava9hacks 的 metadata 同样停留在 2019 年（只有 1.1.0），
+//     1.17.1 需要 1.3.+；tools/dynex2-maven 里补了 1.3.3 与 fabric-loader 0.20.1。
+//
+// 注意：这两个本地仓库不进版本库（见 .gitignore），缺失时本脚本会跳过它们。
+
+def MIRROR = "https://bmclapi2.bangbang93.com/maven/"
+def HOSTS = ["maven.minecraftforge.net", "maven.neoforged.net", "files.minecraftforge.net"]
+
+// cloth-config 官方仓库直连很快；只对它过滤 me.shedaniel 组，避免影响其它依赖的解析顺序。
+def SHEDANIEL = "https://maven.shedaniel.me/"
+
+def setup = { repos, rootDir ->
+    // 本地补充仓库放到第 0 位（倒序插入，保证 dynex2 在最前）
+    def dyn = [
+        ["dynex2Maven", new File(rootDir, "tools/dynex2-maven")],
+        ["dynexMaven",  new File(rootDir, "tools/dynex-maven")],
+    ]
+    dyn.each { name, dir ->
+        if (!dir.isDirectory()) return
+        if (repos.findByName(name)) return
+        def r = repos.maven { url = dir.toURI().toString() }
+        try { repos.addFirst(r) } catch (Throwable ignored) { }
+    }
+    if (!repos.findByName("shedanielMaven")) {
+        def r = repos.maven {
+            name = "shedanielMaven"
+            url = SHEDANIEL
+            content { includeGroup "me.shedaniel" ; includeGroup "me.shedaniel.cloth" }
+        }
+        try { repos.addFirst(r) } catch (Throwable ignored) { }
+    }
+    // 官方 forge 仓库改指 BMCLAPI
+    repos.withType(MavenArtifactRepository).configureEach { r ->
+        def u = r.url?.toString() ?: ""
+        if (HOSTS.any { u.contains(it) }) {
+            r.url = MIRROR
+            println "[init-bmcl] ${u} -> ${MIRROR}"
+        }
+    }
+}
+
+allprojects { p ->
+    def rootDir = p.rootProject.projectDir
+    setup(p.repositories, rootDir)
+    setup(p.buildscript.repositories, rootDir)
+}
+
+settingsEvaluated { s ->
+    setup(s.pluginManagement.repositories, s.rootDir)
+}
