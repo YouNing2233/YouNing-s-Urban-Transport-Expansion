@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import younin.use.block.BlockPSDDoorWide;
 import younin.use.block.flag.BlockFlagApg;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 /**
