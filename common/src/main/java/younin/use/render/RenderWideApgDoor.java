@@ -9,7 +9,7 @@ import mtr.mappings.UtilitiesClient;
 import mtr.render.RenderTrains;
 import mtr.render.StoredMatrixTransformations;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -32,8 +32,8 @@ public class RenderWideApgDoor<T extends BlockPSDAPGDoorBase.TileEntityPSDAPGDoo
     private static final ModelAPGDoorBottom MODEL_APG_BOTTOM = new ModelAPGDoorBottom();
     private static final ModelSingleCube MODEL_APG_DOOR_LOCKED = new ModelSingleCube(6, 6, 5, 10, 1, 6, 6, 0);
 
-    public RenderWideApgDoor(BlockEntityRenderDispatcher dispatcher) {
-        super(dispatcher);
+    public RenderWideApgDoor(BlockEntityRendererProvider.Context context) {
+        super(context.getBlockEntityRenderDispatcher());
     }
 
     @Override

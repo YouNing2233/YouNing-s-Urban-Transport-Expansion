@@ -9,7 +9,7 @@ import mtr.mappings.UtilitiesClient;
 import mtr.render.RenderTrains;
 import mtr.render.StoredMatrixTransformations;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -39,8 +39,8 @@ public class RenderWidePsdDoor<T extends BlockPSDAPGDoorBase.TileEntityPSDAPGDoo
      */
     private static final float STACK_OFFSET = 1F / 16F;
 
-    public RenderWidePsdDoor(BlockEntityRenderDispatcher dispatcher) {
-        super(dispatcher);
+    public RenderWidePsdDoor(BlockEntityRendererProvider.Context context) {
+        super(context.getBlockEntityRenderDispatcher());
     }
 
     @Override
