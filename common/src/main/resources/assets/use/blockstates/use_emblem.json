@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "use:block/use_emblem"
+    }
+  }
+}

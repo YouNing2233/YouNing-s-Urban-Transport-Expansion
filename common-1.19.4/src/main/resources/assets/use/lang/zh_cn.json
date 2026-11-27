@@ -1,6 +1,7 @@
 {
-  "itemGroup.use": "USE",
   "modmenu.nameTranslation.use": "USE",
   "modmenu.descriptionTranslation.use": "YouNing's Urban Transport Expansion",
-  "item.use.dispatcher_baton": "调度棒"
+  "item.use.dispatcher_baton": "调度棒",
+  "itemGroup.use.main": "[USE]主标签页",
+  "block.use.use_emblem": "USE标识"
 }
