@@ -1,6 +1,7 @@
 {
   "block.use.apg_door_wide": "三扇宽屏蔽门（半高）",
   "block.use.psd_door_wide": "三扇宽屏蔽门（全高）",
+  "block.use.psd_top_wide": "屏蔽门吊板（三格）",
   "block.use.use_emblem": "USE标识",
   "item.use.dispatcher_baton": "调度棒",
   "itemGroup.use.beijing": "[USE]北京地铁",

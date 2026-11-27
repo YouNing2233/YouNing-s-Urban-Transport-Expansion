@@ -1,6 +1,7 @@
 {
   "block.use.apg_door_wide": "Three-leaf PSD Door (Half Height)",
   "block.use.psd_door_wide": "Three-leaf PSD Door (Full Height)",
+  "block.use.psd_top_wide": "Platform Screen Door Top (Wide)",
   "block.use.use_emblem": "USE Emblem",
   "item.use.dispatcher_baton": "Dispatcher's Baton",
   "itemGroup.use.beijing": "[USE] Beijing Metro",

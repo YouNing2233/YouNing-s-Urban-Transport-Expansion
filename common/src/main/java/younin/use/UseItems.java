@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import younin.use.block.BlockAPGDoorWide;
 import younin.use.block.BlockPSDDoorWide;
+import younin.use.block.BlockPSDTopWide;
 import younin.use.block.UseEmblem;
 import younin.use.item.DispatcherBaton;
 import younin.use.item.ItemWideApgDoor;
@@ -50,6 +51,13 @@ public final class UseItems {
 
     public static final RegistrySupplier<Item> APG_DOOR_WIDE_ITEM = ITEMS.register("apg_door_wide",
             () -> new ItemWideApgDoor(APG_DOOR_WIDE, new Item.Properties().stacksTo(1)));
+
+    // 三格吊板：随门自动放置，物品只用于掉落与物品栏
+    public static final RegistrySupplier<Block> PSD_TOP_WIDE = BLOCKS.register("psd_top_wide",
+            BlockPSDTopWide::new);
+
+    public static final RegistrySupplier<Item> PSD_TOP_WIDE_ITEM = ITEMS.register("psd_top_wide",
+            () -> new BlockItem(PSD_TOP_WIDE.get(), new Item.Properties()));
 
     private UseItems() {
     }

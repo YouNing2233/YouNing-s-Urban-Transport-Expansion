@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import younin.use.block.BlockAPGDoorWide;
 import younin.use.block.BlockPSDDoorWide;
+import younin.use.block.BlockPSDTopWide;
 
 public final class UseBlockEntityTypes {
 
@@ -20,6 +21,11 @@ public final class UseBlockEntityTypes {
     public static final RegistrySupplier<BlockEntityType<BlockAPGDoorWide.TileEntityAPGDoorWide>> APG_DOOR_WIDE =
             BLOCK_ENTITY_TYPES.register("apg_door_wide", () -> BlockEntityType.Builder
                     .of(BlockAPGDoorWide.TileEntityAPGDoorWide::new, UseItems.APG_DOOR_WIDE.get())
+                    .build(null));
+
+    public static final RegistrySupplier<BlockEntityType<BlockPSDTopWide.TileEntityPSDTopWide>> PSD_TOP_WIDE =
+            BLOCK_ENTITY_TYPES.register("psd_top_wide", () -> BlockEntityType.Builder
+                    .of(BlockPSDTopWide.TileEntityPSDTopWide::new, UseItems.PSD_TOP_WIDE.get())
                     .build(null));
 
     private UseBlockEntityTypes() {

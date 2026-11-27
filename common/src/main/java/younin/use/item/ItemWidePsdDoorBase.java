@@ -20,6 +20,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import younin.use.block.BlockPSDDoorWide;
+import younin.use.block.BlockPSDTopWide;
+import younin.use.UseItems;
 import younin.use.block.flag.BlockFlagApg;
 
 import org.jetbrains.annotations.Nullable;
@@ -73,6 +75,13 @@ public class ItemWidePsdDoorBase extends Item {
                                 : x == 1 ? BlockPSDDoorWide.WideSide.MIDDLE : BlockPSDDoorWide.WideSide.RIGHT);
 
                 world.setBlockAndUpdate(newPos.above(y), state);
+            }
+
+            if (!isAPG()) {
+                // 全高门：门顶再铺一块吊板，三块连起来是一整块牌子
+                final BlockPos topPos = newPos.above(2);
+                world.setBlockAndUpdate(topPos, BlockPSDTopWide.getActualState(world, topPos)
+                        .setValue(BlockPSDTopWide.STYLE, BlockPSDTopWide.Style.STATION_NAME));
             }
         }
 
