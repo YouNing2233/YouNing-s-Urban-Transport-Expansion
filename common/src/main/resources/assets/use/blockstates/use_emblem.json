@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "use:block/use_emblem"
+    },
+    "facing=east": {
+      "model": "use:block/use_emblem",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "use:block/use_emblem",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "use:block/use_emblem",
+      "y": 270
     }
   }
 }

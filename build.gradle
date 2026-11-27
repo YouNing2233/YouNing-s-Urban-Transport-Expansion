@@ -115,7 +115,9 @@ subprojects {
         mappings loom.officialMojangMappings()
 
         // common 树需要 fabric-loader + architectury + cloth-config 才能编译跨平台的注册代码
-        if (isCommon) {
+        if (isCommon && project.name == "common") {
+            // 1.20.1 的 common 树需要 MTR 才能编译继承 MTR 底座（三扇屏蔽门等）的代码
+            modImplementation files(project.subMtrJar)
             modImplementation "net.fabricmc:fabric-loader:${project.subFabricLoaderVersion}"
             modApi "dev.architectury:architectury:${project.subArchitecturyVersion}"
             modApi("me.shedaniel.cloth:cloth-config-fabric:${project.subClothConfigVersion}") {

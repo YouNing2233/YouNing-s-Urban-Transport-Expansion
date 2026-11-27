@@ -5,6 +5,7 @@ import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import younin.use.block.UseEmblem;
 import younin.use.item.DispatcherBaton;
 import dev.architectury.registry.CreativeTabRegistry;
 import net.minecraft.core.registries.Registries;
@@ -21,9 +22,11 @@ public final class UseItems {
 
     public static final RegistrySupplier<CreativeModeTab> MAIN_TAB = TABS.register("main",
             () -> CreativeTabRegistry.create(Component.translatable("itemGroup.use.main"), () -> new ItemStack(UseItems.USE_EMBLEM_ITEM.get())));
+    public static final RegistrySupplier<CreativeModeTab> BEIJING_TAB = TABS.register("beijing",
+            () -> CreativeTabRegistry.create(Component.translatable("itemGroup.use.beijing"), () -> new ItemStack(UseItems.USE_EMBLEM_ITEM.get())));
 
     public static final RegistrySupplier<Block> USE_EMBLEM = BLOCKS.register("use_emblem",
-            () -> new Block(BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.METAL)));
+            () -> new UseEmblem(BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.METAL).noOcclusion()));
 
     public static final RegistrySupplier<Item> USE_EMBLEM_ITEM = ITEMS.register("use_emblem",
             () -> new BlockItem(USE_EMBLEM.get(), new Item.Properties()));
