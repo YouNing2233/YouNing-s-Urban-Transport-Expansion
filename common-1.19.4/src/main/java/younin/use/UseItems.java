@@ -12,13 +12,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 
 public final class UseItems {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Use.MOD_ID, Registries.BLOCK);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Use.MOD_ID, Registries.ITEM);
 
     public static final RegistrySupplier<Block> USE_EMBLEM = BLOCKS.register("use_emblem",
-            () -> new Block(BlockBehaviour.Properties.of().strength(3.0F, 6.0F).sound(SoundType.METAL)));
+            () -> new Block(BlockBehaviour.Properties.of(Material.METAL).strength(3.0F, 6.0F).sound(SoundType.METAL)));
 
     public static final RegistrySupplier<Item> USE_EMBLEM_ITEM = ITEMS.register("use_emblem",
             () -> new BlockItem(USE_EMBLEM.get(), new Item.Properties()));
