@@ -1,5 +1,7 @@
 {
-  "variants": {
-    "": { "model": "use:block/empty" }
-  }
+	"variants": {
+		"": {
+			"model": "minecraft:block/air"
+		}
+	}
 }
